@@ -1,4 +1,5 @@
 <template>
+  <div class="background">
   <ContentBase>
       <div class="card" v-for="user in users" :key="user.id" @click="open_user_profile(user.id)">
         <div class="card-body">
@@ -14,6 +15,7 @@
         </div>
       </div>
   </ContentBase>
+</div>
 </template>
 
 <script>
@@ -66,6 +68,14 @@ export default {
 </script>
 
 <style scoped>
+.background {
+  background:url("../img/background2.jpeg");
+  width:100%;
+  height:100%;
+  position:fixed;
+  background-size:100% 100%;
+}
+
 img {
   border-radius: 50%;
 }

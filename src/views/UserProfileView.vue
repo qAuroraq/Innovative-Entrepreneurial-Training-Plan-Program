@@ -1,4 +1,5 @@
 <template>
+<div class="background">
   <ContentBase>
       <div class="row">
         <div class="col-3">
@@ -11,6 +12,7 @@
         </div>
       </div>
   </ContentBase>
+</div>
 </template>
 
 <script>
@@ -113,4 +115,11 @@ export default {
 </script>
 
 <style scoped>
+.background {
+  background:url("../img/background2.jpeg");
+  width:100%;
+  height:100%;
+  position:fixed;
+  background-size:100% 100%;
+}
 </style>

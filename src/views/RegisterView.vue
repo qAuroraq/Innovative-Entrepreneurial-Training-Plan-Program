@@ -45,7 +45,7 @@ export default {
     const register = () => {
       error_message.value = "";
       $.ajax({
-        url: "https://app165.acapp.acwing.com.cn/myspace/user/",
+        url: "http://43.138.30.253:8000/settings/register/",
         type: "POST",
         data: {
           username: username.value,
@@ -58,7 +58,18 @@ export default {
               username: username.value,
               password: password.value,
               success() {
-                router.push({name: 'userlist'});
+                $.ajax({
+                  url: "http://43.138.30.253:8000/myspace/uploadchain/",
+                  type:"GET",
+                  data: {
+                    username: username.value,
+                    amount: 1500,
+                  },
+                  success(resp){
+                    console.log(resp);
+                  },
+                }),
+                router.push({name: 'home'});
               },
               error() {
                 error_message.value = "系统异常，请稍后重试";

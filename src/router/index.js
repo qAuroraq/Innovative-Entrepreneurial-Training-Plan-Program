@@ -6,6 +6,8 @@ import LoginView from '../views/LoginView';
 import RegisterView from '../views/RegisterView';
 import NotFoundView from '../views/NotFoundView';
 import ResultView from '../views/ResultView';
+import QueryView from '../views/QueryView';
+import ConsultView from '../views/ConsultView';
 
 const routes = [
   {
@@ -47,6 +49,16 @@ const routes = [
     name: 'result',
     component: ResultView
   },
+  {
+    path: '/myspace/query',
+    name: 'query',
+    component: QueryView
+  },
+  {
+    path: '/myspace/consult',
+    name: 'consult',
+    component: ConsultView
+  }
 ]
 
 const router = createRouter({

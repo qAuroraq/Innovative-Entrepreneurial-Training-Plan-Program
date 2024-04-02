@@ -42,7 +42,7 @@ export default {
         username: username.value,
         password: password.value,
         success() {
-          router.push({name: 'userlist'});
+          router.push({name: 'home'});
         },
         error() {
           error_message.value = "用户名或密码错误";

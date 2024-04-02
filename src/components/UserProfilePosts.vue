@@ -8,6 +8,7 @@
                         <div>购买编号：{{ index + 1 }}</div>
                         <div>购买时间：{{post.createtime}}</div>
                         <div>购买商品：{{post.name}}</div>
+                        <div>交易信息区块链哈希值：{{post.hashcode}}</div>
                         <button @click="delete_a_post(post.id)" v-if="is_me" type="button" class="btn btn-danger btn-sm">删除</button>
                     </div>
                 </div>

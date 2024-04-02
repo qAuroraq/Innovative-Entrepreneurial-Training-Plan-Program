@@ -10,8 +10,9 @@
                     </div>
                     <div class="order-info">
                         <p class="info"><b>付款时间：</b><span>{{currentDate}}</span></p>
-                        <p class="info"><b>购买用户：</b><span>￥{{username}}</span></p>
+                        <p class="info"><b>购买用户：</b><span>{{username}}</span></p>
                         <p class="info"><b>支付金额：</b><span><span>￥{{price}}</span></span></p>
+                        <p class="info hashcode"><b>交易信息区块链哈希值：</b><span>{{code}}</span></p>
                     </div>
                     <el-result icon="success" title="支付成功！" sub-title="点击下方按钮返回主页">
         <template #extra>
@@ -26,6 +27,7 @@
 
 <script>
 import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
 import router from '@/router/index';
 import {ref} from 'vue';
 
@@ -36,9 +38,11 @@ export default{
     setup(){
         const currentDate = ref(new Date().toLocaleString());
         const route = useRoute();
-        const username = route.params[0];
-        const price = route.params[1];
-
+        const store = useStore();
+        console.log(route.params)
+        const username = store.state.user.username;
+        const price = route.params[0];
+        const code = store.state.user.code;
         const back = () => {
             router.push({
                 'name': 'home',
@@ -49,6 +53,7 @@ export default{
             price,
             back,
             currentDate,
+            code,
         }
     }
 }
@@ -56,7 +61,12 @@ export default{
 
 <style scoped>
 
+#el-result {
+    margin: 0;
+}
+
 #el-button {
+    margin: 0;
     color: white;;
 }
 .background {
@@ -66,13 +76,9 @@ export default{
   position:fixed;
   background-size:100% 100%;
 }
-.success {
-    margin: 0;
-    padding: 0;
-}
 
 .card {
-    margin-top: 10vh;
+    margin-top: 0;
     padding: 1px;
     background-image: url("../img/background.jpeg");
 }
@@ -116,7 +122,10 @@ export default{
     .info span {
         color: black;
     }
-
+    .hashcode{
+        word-wrap: break-word;
+        word-break: break-all;
+    }
     .order-info {
         padding: 25px 48px;
         padding-bottom: 15px;

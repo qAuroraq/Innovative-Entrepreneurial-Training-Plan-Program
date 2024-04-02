@@ -11,7 +11,13 @@
           <router-link class="nav-link" :to="{name: 'home'}">首页</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{name: 'userlist'}">好友列表</router-link>
+          <router-link class="nav-link" :to="{name: 'userlist'}">列表</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{name: 'query'}">查询</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{name: 'consult'}">链上动态策略分析模型</router-link>
         </li>
       </ul>
       <ul class="navbar-nav" v-if="!$store.state.user.is_login">

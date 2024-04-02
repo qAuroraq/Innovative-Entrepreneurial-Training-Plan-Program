@@ -4,12 +4,12 @@
     <el-col
       v-for="(o, index) in 3" :key="o" :span="6" :offset="index > 0 ? 1 : 0">
       <el-card :body-style="{ padding: '1px' }">
-        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image"/>
+        <img :src="goods[index].photo" class="image"/>
         <div style="padding: 14px">
           <div class="name">{{goods[index].name}}</div>
           <div class="price">￥{{goods[index].price}}</div>
           <div class="bottom">
-            <div class="server"> 本平台用于提供服务</div>
+            <div class="server"> 本平台提供此服务</div>
             <el-button @click="buy_goods(goods[index])" type="warning">购买</el-button>
           </div>
         </div>
@@ -51,16 +51,19 @@ export default {
         'id': 1,
         'name': "洗衣机",
         'price': 316,
+        'photo':require("../img/1.jpg")
       },
       {
         'id': 2,
         'name': "饮水机",
         'price': 317,
+        'photo':require("../img/2.jpg")
       },
       {
         'id':3,
         'name': "空调",
         'price':318,
+        'photo':require("../img/3.jpg"),
       },
     ];
     if(is_login){
@@ -84,7 +87,6 @@ export default {
   }
   const buy_goods = good => {
     if(is_login){
-          let username = user.username;
           $.ajax({
             url: "http://43.138.30.253:8000/myspace/buygoods/",
             type: "GET",
@@ -95,13 +97,25 @@ export default {
             },
             success(resp){
               if(resp.result === "success"){
-                router.push({
-                  'name': 'result',
-                  params: [
-                  good.price,
-                  username,
-                ],
-                });
+                $.ajax({
+                  url: "http://43.138.30.253:8000/myspace/transfer/",
+                  type: "GET",
+                  data:{
+                    user_id: userID,
+                    price: good.price,
+                    product_id: resp.product_id,
+                  },
+                  success(resp){
+                    store.state.user.code = resp.hashcode;
+                    router.push({
+                      'name': 'result',
+                       params: [
+                       good.price,
+                      ],
+                    });
+                  },   
+                }),
+                console.log(store.state.user.code);
               }
             }
           })

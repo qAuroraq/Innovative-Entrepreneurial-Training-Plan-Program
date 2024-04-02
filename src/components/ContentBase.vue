@@ -20,4 +20,7 @@ export default {
 .container {
   margin-top: 20px;
 }
+.card{
+  background-color: beige;
+}
 </style>
